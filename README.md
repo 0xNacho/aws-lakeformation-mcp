@@ -1,4 +1,4 @@
-# aws-athena-mcp
+# aws-lakeformation-mcp
 
 ## Testing with mcp-inspector
 ```
