@@ -3,9 +3,11 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { CallToolRequestSchema, ListToolsRequestSchema, Tool } from "@modelcontextprotocol/sdk/types.js";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 
+import {grantPermissions} from "./lakeformation_client";
+
 const GRANT_TOOL: Tool = {
-  name: "grant_lakeformation_permissions",
-  description: "Grants lakeformation permissions to an  user",
+  name: "grant_lakeformation_permissions_on_table",
+  description: "Grants lakeformation permissions on a table",
   inputSchema: {
     type: "object",
     properties: {
@@ -36,8 +38,10 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
 
-  if (name === "gran_lakeformation_permissions") {
+  if (name === "grant_lakeformation_permissions_on_table") {
     const { table, roleName} = args as Record<string, string>;
+
+    await grantPermissions(table, roleName, ["SELECT", "INSERT"]);
     try {
       return {
         content: [{ type: "text", text: `Granting permissions to ${roleName} on table ${table}` }],
@@ -59,7 +63,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function runServer() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("AWS KB Retrieval Server running on stdio");
+  console.error("AWS Lakeformation Server running on stdio");
 }
 
 runServer().catch((error) => {
