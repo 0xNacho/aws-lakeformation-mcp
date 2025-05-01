@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@aws-sdk/client-lakeformation": "^3.799.0",
+    "@modelcontextprotocol/sdk": "^1.10.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3"
+  }
+}
