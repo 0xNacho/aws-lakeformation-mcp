@@ -1,9 +1,47 @@
 {
+  "name": "aws-lakeformation-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server for Lakeformation permissions",
+  "type": "module",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "bin": {
+    "aws-lakeformation-mcp": "build/index.js"
+  },
+  "files": [
+    "build",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x build/index.js",
+    "start": "node build/src/index.js",
+    "dev": "tsc -w",
+    "prepublishOnly": "npm run build",
+    "test": "jest"
+  },
+  "keywords": [
+    "mcp",
+    "aws",
+    "lakeformation",
+    "modelcontextprotocol",
+    "llm",
+    "ai"
+  ],
+  "author": "0xNacho",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xNacho/aws-lakeformation-mcp"
+  },
+  "engines": {
+    "node": ">17"
+  },
   "dependencies": {
     "@aws-sdk/client-lakeformation": "^3.799.0",
     "@modelcontextprotocol/sdk": "^1.10.2"
   },
   "devDependencies": {
-    "@types/node": "^22.15.3"
+    "@types/node": "^20.0.0",
+    "typescript": "^5.8.3"
   }
 }
