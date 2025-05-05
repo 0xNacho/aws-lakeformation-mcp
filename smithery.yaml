@@ -1,0 +1,33 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - table
+      - roleName
+    properties:
+      awsRegion:
+        type: string
+        default: us-east-1
+        description: AWS region for Lake Formation client
+      table:
+        type: string
+        description: Table in format <database>.<tableName>
+      roleName:
+        type: string
+        description: Role ARN to grant permissions
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => ({
+      command: 'npx',
+      args: ['ts-node', 'src/index.ts'],
+      env: { AWS_REGION: config.awsRegion }
+    })
+  exampleConfig:
+    awsRegion: us-east-1
+    table: mydb.mytable
+    roleName: arn:aws:iam::123456789012:role/MyRole
