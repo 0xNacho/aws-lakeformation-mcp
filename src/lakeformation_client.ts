@@ -6,10 +6,10 @@ const lakeFormationClient = new LakeFormationClient({region: process.env.AWS_REG
 /**
  * Grants permissions to a role for a specific table in AWS Lake Formation.
  * @param table - The table name in the format <database_name>.<table_name>.
- * @param roleName - The ARN of the role to grant permissions to.
+ * @param principal - The ARN of the role to grant permissions to.
  * @param permissions - The list of permissions to grant (e.g., ["SELECT", "INSERT"]).
  */
-export async function grantPermissions(table: string, roleName: string, permissions: Permission[] = ["SELECT"]) {
+export async function grantPermissions(table: string, principal: string, permissions: Permission[] = ["SELECT"]) {
     const [databaseName, tableName] = table.split(".");
 
   if (!databaseName || !tableName) {
@@ -17,7 +17,7 @@ export async function grantPermissions(table: string, roleName: string, permissi
   }
 
   const command = new GrantPermissionsCommand({
-    Principal: { DataLakePrincipalIdentifier: roleName },
+    Principal: { DataLakePrincipalIdentifier: principal },
     Resource: {
       Table: {
         DatabaseName: databaseName,

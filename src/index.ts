@@ -51,7 +51,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             case "grant_table_permissions": {
                 const typedArgs = args as unknown as TablePermissionArgs;
                 if (!typedArgs.table || !typedArgs.principal) {
-                    throw new Error("Missing required arguments: table and roleName");
+                    throw new Error("Missing required arguments: table and principal");
                 }
                 return handleResult(await grantTablePermissions(
                     typedArgs.table,
@@ -63,7 +63,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             case "grant_table_columns_permissions": {
                 const typedArgs = args as unknown as TableColumnsPermissionArgs;
                 if (!typedArgs.table || !typedArgs.columns || !typedArgs.principal) {
-                    throw new Error("Missing required arguments: table, columns, and roleName");
+                    throw new Error("Missing required arguments: table, columns, and principal");
                 }
                 return handleResult(await grantTableColumnsPermissions(
                     typedArgs.table,
@@ -76,7 +76,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             case "grant_database_permissions": {
                 const typedArgs = args as unknown as DatabasePermissionArgs;
                 if (!typedArgs.databaseName || !typedArgs.principal) {
-                    throw new Error("Missing required arguments: databaseName and roleName");
+                    throw new Error("Missing required arguments: databaseName and principal");
                 }
                 return handleResult(await grantDatabasePermissions(
                     typedArgs.databaseName,
@@ -88,7 +88,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             case "grant_lf_tag_permissions": {
                 const typedArgs = args as unknown as LFTagPermissionArgs;
                 if (!typedArgs.tagKey || !typedArgs.tagValues || !typedArgs.principal) {
-                    throw new Error("Missing required arguments: tagKey, tagValues, and roleName");
+                    throw new Error("Missing required arguments: tagKey, tagValues, and principal");
                 }
                 return handleResult(await grantLFTagPermissions(
                     typedArgs.tagKey,
@@ -101,7 +101,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             case "revoke_table_permissions": {
                 const typedArgs = args as unknown as TablePermissionArgs;
                 if (!typedArgs.table || !typedArgs.principal) {
-                    throw new Error("Missing required arguments: table and roleName");
+                    throw new Error("Missing required arguments: table and principal");
                 }
                 return handleResult(await revokeTablePermissions(
                     typedArgs.table,
@@ -113,7 +113,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             case "revoke_table_columns_permissions": {
                 const typedArgs = args as unknown as TableColumnsPermissionArgs;
                 if (!typedArgs.table || !typedArgs.columns || !typedArgs.principal) {
-                    throw new Error("Missing required arguments: table, columns, and roleName");
+                    throw new Error("Missing required arguments: table, columns, and principal");
                 }
                 return handleResult(await revokeTableColumnsPermissions(
                     typedArgs.table,
@@ -126,7 +126,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             case "revoke_database_permissions": {
                 const typedArgs = args as unknown as DatabasePermissionArgs;
                 if (!typedArgs.databaseName || !typedArgs.principal) {
-                    throw new Error("Missing required arguments: databaseName and roleName");
+                    throw new Error("Missing required arguments: databaseName and principal");
                 }
                 return handleResult(await revokeDatabasePermissions(
                     typedArgs.databaseName,
@@ -138,7 +138,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             case "revoke_lf_tag_permissions": {
                 const typedArgs = args as unknown as LFTagPermissionArgs;
                 if (!typedArgs.tagKey || !typedArgs.tagValues || !typedArgs.principal) {
-                    throw new Error("Missing required arguments: tagKey, tagValues, and roleName");
+                    throw new Error("Missing required arguments: tagKey, tagValues, and principal");
                 }
                 return handleResult(await revokeLFTagPermissions(
                     typedArgs.tagKey,

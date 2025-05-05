@@ -37,7 +37,7 @@ export class LakeFormationPermissionFactory {
      * Creates a request to grant or revoke permissions on a table in AWS Lake Formation.
      * @param databaseName the nane of the database
      * @param tableName the name of the table 
-     * @param roleName the name of the role
+     * @param principal the name of the role
      * @param operation  the operation to perform (GRANT or REVOKE)
      * @param permissions  the permissions to grant or revoke
      * @returns a LakeFormationPermissionRequest object
@@ -45,12 +45,12 @@ export class LakeFormationPermissionFactory {
     static createTableRequest(
         databaseName: string,
         tableName: string,
-        roleName: string,
+        principal: string,
         operation: 'GRANT' | 'REVOKE',
         permissions: Permission[] = ["SELECT"]
     ): LakeFormationPermissionRequest {
         const resource = new TableResource(databaseName, tableName);
-        return new LakeFormationPermissionRequest(roleName, operation, permissions, resource);
+        return new LakeFormationPermissionRequest(principal, operation, permissions, resource);
     }
 
     /**
@@ -58,7 +58,7 @@ export class LakeFormationPermissionFactory {
      * @param databaseName the name of the database
      * @param tableName the name of the table
      * @param columns the list of columns
-     * @param roleName the name of the role
+     * @param principal the name of the role
      * @param operation the operation to perform (GRANT or REVOKE)
      * @param permissions the permissions to grant or revoke
      * @returns a LakeFormationPermissionRequest object
@@ -67,37 +67,37 @@ export class LakeFormationPermissionFactory {
         databaseName: string,
         tableName: string,
         columns: string[],
-        roleName: string,
+        principal: string,
         operation: 'GRANT' | 'REVOKE',
         permissions: Permission[] = ["SELECT"]
     ): LakeFormationPermissionRequest {
         const resource = new TableWithColumnsResource(databaseName, tableName, columns);
-        return new LakeFormationPermissionRequest(roleName, operation, permissions, resource);
+        return new LakeFormationPermissionRequest(principal, operation, permissions, resource);
     }
 
     /**
      * Creates a request to grant or revoke permissions on a database in AWS Lake Formation.
      * @param databaseName the name of the database
-     * @param roleName the name of the role
+     * @param principal the name of the role
      * @param operation the operation to perform (GRANT or REVOKE)
      * @param permissions the permissions to grant or revoke
      * @returns a LakeFormationPermissionRequest object
      */
     static createDatabaseRequest(
         databaseName: string,
-        roleName: string,
+        principal: string,
         operation: 'GRANT' | 'REVOKE',
         permissions: Permission[] = ["CREATE_TABLE"]
     ): LakeFormationPermissionRequest {
         const resource = new DatabaseResource(databaseName);
-        return new LakeFormationPermissionRequest(roleName, operation, permissions, resource);
+        return new LakeFormationPermissionRequest(principal, operation, permissions, resource);
     }
 
     /**
      * Creates a request to grant or revoke permissions on LF tags in AWS Lake Formation.
      * @param tagKey the key of the LF tag
      * @param tagValues the values of the LF tag
-     * @param roleName the name of the role
+     * @param principal the name of the role
      * @param operation the operation to perform (GRANT or REVOKE)
      * @param permissions the permissions to grant or revoke
      * @returns a LakeFormationPermissionRequest object
@@ -105,12 +105,12 @@ export class LakeFormationPermissionFactory {
     static createLFTagRequest(
         tagKey: string,
         tagValues: string[],
-        roleName: string,
+        principal: string,
         operation: 'GRANT' | 'REVOKE',
         permissions: Permission[] = ["DESCRIBE"]
     ): LakeFormationPermissionRequest {
         const resource = new LFTagResource(tagKey, tagValues);
-        return new LakeFormationPermissionRequest(roleName, operation, permissions, resource);
+        return new LakeFormationPermissionRequest(principal, operation, permissions, resource);
     }
 
     /**

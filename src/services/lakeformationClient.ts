@@ -32,14 +32,14 @@ export async function managePermissions(request: LakeFormationPermissionRequest)
 // Convenience methods for common operations
 export async function grantTablePermissions(
     table: string,
-    roleName: string,
+    principal: string,
     permissions: Permission[] = ["SELECT"]
 ): Promise<PermissionResult> {
     const [dbName, tableName] = LakeFormationPermissionFactory.parseTableIdentifier(table);
     const request = LakeFormationPermissionFactory.createTableRequest(
         dbName,
         tableName,
-        roleName,
+        principal,
         'GRANT',
         permissions
     );
@@ -49,7 +49,7 @@ export async function grantTablePermissions(
 export async function grantTableColumnsPermissions(
     table: string,
     columns: string[],
-    roleName: string,
+    principal: string,
     permissions: Permission[] = ["SELECT"]
 ): Promise<PermissionResult> {
     const [dbName, tableName] = LakeFormationPermissionFactory.parseTableIdentifier(table);
@@ -57,7 +57,7 @@ export async function grantTableColumnsPermissions(
         dbName,
         tableName,
         columns,
-        roleName,
+        principal,
         'GRANT',
         permissions
     );
@@ -66,12 +66,12 @@ export async function grantTableColumnsPermissions(
 
 export async function grantDatabasePermissions(
     databaseName: string,
-    roleName: string,
+    principal: string,
     permissions: Permission[] = ["CREATE_TABLE"]
 ): Promise<PermissionResult> {
     const request = LakeFormationPermissionFactory.createDatabaseRequest(
         databaseName,
-        roleName,
+        principal,
         'GRANT',
         permissions
     );
@@ -81,13 +81,13 @@ export async function grantDatabasePermissions(
 export async function grantLFTagPermissions(
     tagKey: string,
     tagValues: string[],
-    roleName: string,
+    principal: string,
     permissions: Permission[] = ["DESCRIBE"]
 ): Promise<PermissionResult> {
     const request = LakeFormationPermissionFactory.createLFTagRequest(
         tagKey,
         tagValues,
-        roleName,
+        principal,
         'GRANT',
         permissions
     );
@@ -97,14 +97,14 @@ export async function grantLFTagPermissions(
 // Revoke operations
 export async function revokeTablePermissions(
     table: string,
-    roleName: string,
+    principal: string,
     permissions: Permission[] = ["SELECT"]
 ): Promise<PermissionResult> {
     const [dbName, tableName] = LakeFormationPermissionFactory.parseTableIdentifier(table);
     const request = LakeFormationPermissionFactory.createTableRequest(
         dbName,
         tableName,
-        roleName,
+        principal,
         'REVOKE',
         permissions
     );
@@ -114,7 +114,7 @@ export async function revokeTablePermissions(
 export async function revokeTableColumnsPermissions(
     table: string,
     columns: string[],
-    roleName: string,
+    principal: string,
     permissions: Permission[] = ["SELECT"]
 ): Promise<PermissionResult> {
     const [dbName, tableName] = LakeFormationPermissionFactory.parseTableIdentifier(table);
@@ -122,7 +122,7 @@ export async function revokeTableColumnsPermissions(
         dbName,
         tableName,
         columns,
-        roleName,
+        principal,
         'REVOKE',
         permissions
     );
@@ -131,12 +131,12 @@ export async function revokeTableColumnsPermissions(
 
 export async function revokeDatabasePermissions(
     databaseName: string,
-    roleName: string,
+    principal: string,
     permissions: Permission[] = ["CREATE_TABLE"]
 ): Promise<PermissionResult> {
     const request = LakeFormationPermissionFactory.createDatabaseRequest(
         databaseName,
-        roleName,
+        principal,
         'REVOKE',
         permissions
     );
@@ -146,13 +146,13 @@ export async function revokeDatabasePermissions(
 export async function revokeLFTagPermissions(
     tagKey: string,
     tagValues: string[],
-    roleName: string,
+    principal: string,
     permissions: Permission[] = ["DESCRIBE"]
 ): Promise<PermissionResult> {
     const request = LakeFormationPermissionFactory.createLFTagRequest(
         tagKey,
         tagValues,
-        roleName,
+        principal,
         'REVOKE',
         permissions
     );

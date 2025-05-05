@@ -11,7 +11,7 @@ export class PermissionRequest {
     
     constructor(
         table: string,
-        public readonly roleName: string,
+        public readonly principal: string,
         public readonly operation: PermissionOperation = 'GRANT',
         public readonly fields: string[]  = [],
         public readonly permissions: Permission[] = ["SELECT"]

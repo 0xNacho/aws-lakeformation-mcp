@@ -28,27 +28,27 @@ export function createPermissionTools(
 // Define tool schemas
 const TABLE_SCHEMA = {
     table: { type: "string", description: "Name of the table (format: <database_name>.<table_name>)" },
-    roleName: { type: "string", description: "Name of the role (format: arn:aws:iam::*:role/*)" },
+    principal: { type: "string", description: "Name of the role (format: arn:aws:iam::*:role/*)" },
     permissions: { type: "array", description: "List of permissions to grant", items: { type: "string" }, default: ["SELECT"] }
 };
 
 const TABLE_COLUMNS_SCHEMA = {
     table: { type: "string", description: "Name of the table (format: <database_name>.<table_name>)" },
     columns: { type: "array", description: "List of column names", items: { type: "string" } },
-    roleName: { type: "string", description: "Name of the role (format: arn:aws:iam::*:role/*)" },
+    principal: { type: "string", description: "Name of the role (format: arn:aws:iam::*:role/*)" },
     permissions: { type: "array", description: "List of permissions to grant", items: { type: "string" }, default: ["SELECT"] }
 };
 
 const DATABASE_SCHEMA = {
     databaseName: { type: "string", description: "Name of the database" },
-    roleName: { type: "string", description: "Name of the role (format: arn:aws:iam::*:role/*)" },
+    principal: { type: "string", description: "Name of the role (format: arn:aws:iam::*:role/*)" },
     permissions: { type: "array", description: "List of permissions to grant", items: { type: "string" }, default: ["CREATE_TABLE"] }
 };
 
 const LFTAG_SCHEMA = {
     tagKey: { type: "string", description: "The key of the LF tag" },
     tagValues: { type: "array", description: "List of tag values", items: { type: "string" } },
-    roleName: { type: "string", description: "Name of the role (format: arn:aws:iam::*:role/*)" },
+    principal: { type: "string", description: "Name of the role (format: arn:aws:iam::*:role/*)" },
     permissions: { type: "array", description: "List of permissions to grant", items: { type: "string" }, default: ["DESCRIBE"] }
 };
 
