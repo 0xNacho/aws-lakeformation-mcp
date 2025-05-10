@@ -4,10 +4,6 @@
   "description": "Model Context Protocol (MCP) server for Lakeformation permissions",
   "type": "module",
   "main": "build/index.js",
-  "types": "build/index.d.ts",
-  "bin": {
-    "aws-lakeformation-mcp": "build/index.js"
-  },
   "files": [
     "build",
     "README.md"
